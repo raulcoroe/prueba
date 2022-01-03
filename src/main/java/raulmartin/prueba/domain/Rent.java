@@ -5,17 +5,18 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
+import javax.persistence.*;
 import java.time.Duration;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity(name = "rent")
 public class Rent {
-    @Column
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @Column(name = "start_date")
     @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
     private LocalDateTime startDate;

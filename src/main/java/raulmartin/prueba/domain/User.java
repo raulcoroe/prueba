@@ -2,21 +2,19 @@ package raulmartin.prueba.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Generated;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.*;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+
+@Entity(name = "user")
 public class User {
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
-    private int id;
+    private Long id;
     @Column
     private String name;
     @Column
