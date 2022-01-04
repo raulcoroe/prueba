@@ -1,10 +1,12 @@
 package raulmartin.prueba.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -23,4 +25,9 @@ public class User {
     private String email;
     @Column
     private float balance;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    @JsonBackReference(value = "rent_user")
+    List<Rent> rents;
+
 }

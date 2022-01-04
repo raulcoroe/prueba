@@ -1,5 +1,6 @@
 package raulmartin.prueba.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,6 +9,8 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.Duration;
 import java.time.LocalDateTime;
+
+import static java.lang.Math.abs;
 
 @Data
 @AllArgsConstructor
@@ -28,10 +31,18 @@ public class Rent {
     @Column
     private float cost;
 
+    @ManyToOne
+    @JoinColumn (name = "user_id")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn (name = "bike_id")
+    private Bike bike;
+
     public float getCost() {
         float COST_PER_MINUTE = (float) 0.10;
         Duration duration = Duration.between(endDate, startDate);
-        cost = COST_PER_MINUTE * (duration.getSeconds() / 60);
+        cost = abs(COST_PER_MINUTE * (duration.getSeconds() / 60));
         return cost;
     }
 }

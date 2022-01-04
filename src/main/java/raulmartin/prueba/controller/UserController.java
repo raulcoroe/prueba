@@ -31,6 +31,18 @@ public class UserController {
         return new ResponseEntity(userView, HttpStatus.OK);
     }
 
+    @PatchMapping("/user/{id}")
+    public ResponseEntity<User> cargarSaldo (@PathVariable long id, @RequestBody float balance) throws UserNotFoundException {
+        User user = userService.cargarSaldo(id, balance);
+        return new ResponseEntity(user, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/user/{id}")
+    public ResponseEntity<User> bajaUsuario (@PathVariable long id) throws UserNotFoundException {
+        userService.bajaUsuario(id);
+        return new ResponseEntity("El usuario ha sido dado de baja", HttpStatus.OK);
+    }
+
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<ErrorResponse> handleUserNotFoundException (UserNotFoundException unfe){
         ErrorResponse errorResponse = new ErrorResponse("404", "User not found");

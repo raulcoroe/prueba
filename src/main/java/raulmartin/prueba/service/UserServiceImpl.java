@@ -27,4 +27,18 @@ public class UserServiceImpl implements UserService {
         User user = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
         return user;
     }
+
+    @Override
+    public User cargarSaldo(long id, float balance) throws UserNotFoundException {
+        User user = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
+        user.setBalance(balance);
+        userRepository.save(user);
+        return user;
+    }
+
+    @Override
+    public void bajaUsuario(long id) throws UserNotFoundException {
+        User user = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
+        userRepository.delete(user);
+    }
 }

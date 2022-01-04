@@ -1,9 +1,11 @@
 package raulmartin.prueba.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -19,4 +21,8 @@ public class Bike {
     private boolean availability;
     @Column
     private int station;
+
+    @OneToMany(mappedBy = "bike", cascade = CascadeType.REMOVE)
+    @JsonBackReference(value = "rent_bike")
+    List<Rent> rents;
 }
