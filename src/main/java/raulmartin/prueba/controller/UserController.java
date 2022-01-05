@@ -38,7 +38,7 @@ public class UserController {
     }
 
     @DeleteMapping("/user/{id}")
-    public ResponseEntity<User> bajaUsuario (@PathVariable long id) throws UserNotFoundException {
+    public ResponseEntity<String> bajaUsuario (@PathVariable long id) throws UserNotFoundException {
         userService.bajaUsuario(id);
         return new ResponseEntity("El usuario ha sido dado de baja", HttpStatus.OK);
     }

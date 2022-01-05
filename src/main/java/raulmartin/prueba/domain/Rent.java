@@ -39,7 +39,7 @@ public class Rent {
     @JoinColumn (name = "bike_id")
     private Bike bike;
 
-    public float getCost() {
+    public float rentCost() {
         float COST_PER_MINUTE = (float) 0.10;
         Duration duration = Duration.between(endDate, startDate);
         cost = abs(COST_PER_MINUTE * (duration.getSeconds() / 60));
